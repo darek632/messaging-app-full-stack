@@ -4,6 +4,7 @@ import passport from "passport";
 import cors from "cors";
 import "./config/passport.js";
 import authRouter from "./routes/authRouter.js"
+import conversationRouter from "./routes/conversationRouter.js";
 
 
 const app = express();
@@ -12,7 +13,9 @@ app.use(cors());
 app.use(express.json());
 app.use(passport.initialize());
 
+
 app.use("/auth", authRouter);
+app.use("/conversations", conversationRouter);
 
 
 
@@ -30,3 +33,5 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => console.log(`API listening on port ${PORT}`));
+
+

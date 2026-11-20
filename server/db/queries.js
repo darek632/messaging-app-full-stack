@@ -57,4 +57,33 @@ export async function createMessage(conversationId, senderId, body) {
   });
 }
 
+export async function getConversationsForUser(userId) {
+  return prisma.conversation.findMany({
+    where: {
+      participants: { some: { userId } },
+    },
+    include: {
+      participants: {
+        where: { userId: { not: userId } },
+        select: { user: { select: { id: true, username: true } } },
+      },
+      messages: {
+        orderBy: { createdAt: "desc" },
+        take: 1,
+      },
+    },
+  });
+}
+
+export async function getMessages(conversationId) {
+  return prisma.message.findMany({
+    where: { conversationId },
+    orderBy: { createdAt: "asc" },
+    include: {
+      sender: { select: { id: true, username: true } },
+    },
+  });
+}
+
+
 
