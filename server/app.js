@@ -3,8 +3,10 @@ import express from "express";
 import passport from "passport";
 import cors from "cors";
 import "./config/passport.js";
+
 import authRouter from "./routes/authRouter.js"
 import conversationRouter from "./routes/conversationRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 
 const app = express();
@@ -16,6 +18,7 @@ app.use(passport.initialize());
 
 app.use("/auth", authRouter);
 app.use("/conversations", conversationRouter);
+app.use("/users", userRouter);
 
 
 

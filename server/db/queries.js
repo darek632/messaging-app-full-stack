@@ -1,5 +1,14 @@
 import {prisma} from "./prisma.js"
 
+const publicUserFields = {
+  id: true,
+  username: true,
+  displayName: true,
+  bio: true,
+  avatarUrl: true,
+};
+
+
 export async function getUserByUsername(username) { 
     return prisma.user.findUnique({where: {username}});
 
@@ -84,6 +93,44 @@ export async function getMessages(conversationId) {
     },
   });
 }
+
+
+// searching users for front end starting chats
+export async function searchUsers(search, excludeUserId) {
+  return prisma.user.findMany({
+    where: {
+      id: { not: excludeUserId },
+      ...(search && {
+        OR: [
+          { username: { contains: search, mode: "insensitive" } },
+          { displayName: { contains: search, mode: "insensitive" } },
+        ],
+      }),
+    },
+    select: publicUserFields,
+    orderBy: { username: "asc" },
+    take: 50,
+  });
+}
+
+export async function getUserProfile(id) {
+  return prisma.user.findUnique({
+    where: { id },
+    select: { ...publicUserFields, createdAt: true },
+  });
+}
+
+export async function updateUserProfile(id, data) {
+  return prisma.user.update({
+    where: { id },
+    data,
+    select: publicUserFields,
+  });
+}
+
+
+
+
 
 
 

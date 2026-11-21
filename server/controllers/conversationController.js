@@ -1,4 +1,4 @@
-import { body, param, validationResult } from "express-validator";
+import { body, param, validationResult, query } from "express-validator";
 import * as db from "../db/queries.js";
 
 const validateStart = [
@@ -10,7 +10,6 @@ const validateConversationId = [
 ];
 
 
-
 const validateMessageBody = [
   body("body")
     .trim()
@@ -19,6 +18,8 @@ const validateMessageBody = [
     .isLength({ max: 2000 })
     .withMessage("Message is too long"),
 ];
+
+
 
 export const startConversation = [
   validateStart,
@@ -95,5 +96,7 @@ export const getMessages = [
     res.json({ messages });
   },
 ];
+
+
 
 
