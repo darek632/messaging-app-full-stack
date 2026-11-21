@@ -1,0 +1,57 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 1rem 1.5rem;
+  border-bottom: var(--border);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.main {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  background: var(--white);
+  border: var(--border);
+  box-shadow: 8px 8px 0 var(--green);
+}
+
+.card h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.switch {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: var(--border);
+}

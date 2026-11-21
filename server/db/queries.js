@@ -74,7 +74,7 @@ export async function getConversationsForUser(userId) {
     include: {
       participants: {
         where: { userId: { not: userId } },
-        select: { user: { select: { id: true, username: true } } },
+        select: { user: { select: publicUserFields } },
       },
       messages: {
         orderBy: { createdAt: "desc" },
